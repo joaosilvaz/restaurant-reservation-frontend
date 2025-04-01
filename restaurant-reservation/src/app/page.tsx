@@ -1,6 +1,5 @@
-import Hero from "@/components/hero";
+import Hero from "@/components/banner";
 import Header from "../components/header";
-import Image from "next/image";
 import About from "@/components/about";
 import Location from "@/components/location";
 import Footer from "@/components/footer";
@@ -13,7 +12,7 @@ export default function Home() {
     <Header />
     <Hero />
     <About />
-    <Reservation />
+    <Reservation active={"view"} />
     <Location/>
     <OpeningHours />
     <Footer />

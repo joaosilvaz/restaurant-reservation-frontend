@@ -1,4 +1,13 @@
-const Reservation = () => {
+import Link from "next/link";
+
+interface ReservationProps {
+  active: "create" | "alter" | "view" | "delete";
+}
+
+export default function Reservation(props: ReservationProps) {
+  const { active } = props
+  const classActive = "";
+
   return (
     <section id="reservas" className="bg-[#294056] text-white py-16 px-6">
       <div className="container mx-auto max-w-4xl">
@@ -19,23 +28,32 @@ const Reservation = () => {
           </div>
 
           <div className="flex flex-col gap-4 items-end">
-            <button className="w-64 bg-[#A8BBCD] text-white font-bold py-3 rounded-lg hover:bg-gray-400 transition cursor-pointer">
-              CRIAR RESERVA
-            </button>
-            <button className="w-64 bg-[#A8BBCD] text-white font-bold py-3 rounded-lg hover:bg-gray-400 transition cursor-pointer">
-              ALTERAR RESERVA
-            </button>
-            <button className="w-64 bg-[#A8BBCD] text-white font-bold py-3 rounded-lg hover:bg-gray-400 transition cursor-pointer">
-              VER RESERVA
-            </button>
-            <button className="w-64 bg-[#A8BBCD] text-white font-bold py-3 rounded-lg hover:bg-gray-400 transition cursor-pointer">
-              EXCLUIR RESERVA
-            </button>
+            <Link href="/create">
+              <button
+                className={`w-64 bg-[#A8BBCD] text-white font-bold py-3 rounded-lg hover:bg-gray-400 transition cursor-pointer ${active === "create" ? classActive : ""}`}
+              >
+                CRIAR RESERVA
+              </button>
+            </Link>
+            <Link href="/alter">
+              <button className={`w-64 bg-[#A8BBCD] text-white font-bold py-3 rounded-lg hover:bg-gray-400 transition cursor-pointer ${active === "alter" ? classActive : ""}`}>
+                ALTERAR RESERVA
+              </button>
+            </Link>
+            <Link href="/view">
+              <button className={`w-64 bg-[#A8BBCD] text-white font-bold py-3 rounded-lg hover:bg-gray-400 transition cursor-pointer ${active === "view" ? classActive : ""}`}>
+                VER RESERVA
+              </button>
+            </Link>
+            <Link href="/delete">
+              <button className={`w-64 bg-[#A8BBCD] text-white font-bold py-3 rounded-lg hover:bg-gray-400 transition cursor-pointer ${active === "delete" ? classActive : ""}`}>
+                EXCLUIR RESERVA
+              </button>
+            </Link>
+
           </div>
         </div>
       </div>
     </section>
   );
-};
-
-export default Reservation;
+}

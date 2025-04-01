@@ -1,4 +1,6 @@
-const Footer = () => {
+import Link from "next/link";
+
+export default function Footer() {
   return (
     <footer className="bg-[#294056] text-white py-10 px-10">
       <div className="flex justify-between items-start">
@@ -11,19 +13,18 @@ const Footer = () => {
           <img src="/images/logo-yamato.jpeg" alt="Logo" className="w-18 h-auto rounded-4xl" />
         </div>
         <div className="flex gap-4">
-          <a href="#" className="hover:opacity-80 transition">
+          <Link href="#" className="hover:opacity-80 transition">
             <img src="/images/insta.png" alt="Instagram" className="w-6 h-6" />
-          </a>
-          <a href="#" className="hover:opacity-80 transition">
+          </Link>
+          <Link href="#" className="hover:opacity-80 transition">
             <img src="/images/facebook.png" alt="Facebook" className="w-6 h-6" />
-          </a>
-          <a href="#" className="hover:opacity-80 transition">
+          </Link>
+          <Link href="#" className="hover:opacity-80 transition">
             <img src="/images/whatsapp.png" alt="WhatsApp" className="w-6 h-6" />
-          </a>
+          </Link>
         </div>
       </div>
 
-      {/* Texto centralizado */}
       <p className="text-sm text-center mt-6">
         &copy; 2025 Yamato Gourmet. Todos os direitos reservados.
       </p>
@@ -31,4 +32,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+

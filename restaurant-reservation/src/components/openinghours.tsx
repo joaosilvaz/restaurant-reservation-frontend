@@ -1,4 +1,4 @@
-const OpeningHours = () => {
+export default function OpeningHours() {
   return (
     <section id="horarios" className="flex justify-center items-center py-12">
       <div className="bg-[#294056] text-white p-8 rounded-lg w-[800px] h-[260px] text-center shadow-lg">
@@ -16,4 +16,3 @@ const OpeningHours = () => {
   );
 };
 
-export default OpeningHours;
