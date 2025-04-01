@@ -3,7 +3,7 @@ import Link from "next/link";
 const Hero = () => {
     return (
         <section className="relative h-[400px] bg-[url('/images/restaurant.png')] bg-cover bg-center">
-            <nav className="container mx-auto flex justify-start p-3">
+            <nav className="container flex justify-start p-3 ml-10">
                 <ul className="flex space-x-6 text-white font-semibold">
                     <li><Link href="/">Home</Link></li>
                     <li><Link href="#reservas">Reserva</Link></li>
