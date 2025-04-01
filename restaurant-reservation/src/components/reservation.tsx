@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 interface ReservationProps {
-  active: "create" | "alter" | "view" | "delete";
+  active: "create" | "edit" | "view" | "delete";
 }
 
 export default function Reservation(props: ReservationProps) {
@@ -35,12 +35,12 @@ export default function Reservation(props: ReservationProps) {
                 CRIAR RESERVA
               </button>
             </Link>
-            <Link href="/alter">
-              <button className={`w-64 bg-[#A8BBCD] text-white font-bold py-3 rounded-lg hover:bg-gray-400 transition cursor-pointer ${active === "alter" ? classActive : ""}`}>
+            <Link href="/edit">
+              <button className={`w-64 bg-[#A8BBCD] text-white font-bold py-3 rounded-lg hover:bg-gray-400 transition cursor-pointer ${active === "edit" ? classActive : ""}`}>
                 ALTERAR RESERVA
               </button>
             </Link>
-            <Link href="/view">
+            <Link href="/view-reservations">
               <button className={`w-64 bg-[#A8BBCD] text-white font-bold py-3 rounded-lg hover:bg-gray-400 transition cursor-pointer ${active === "view" ? classActive : ""}`}>
                 VER RESERVA
               </button>

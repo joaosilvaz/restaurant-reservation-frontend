@@ -94,6 +94,7 @@ export default function CreateReservation() {
           </button>
           <button
             type="button"
+            onClick={() => window.location.href = "/#reservas"}
             className="w-1/3 bg-red-600 text-white font-bold py-3 rounded-lg hover:bg-red-700 transition cursor-pointer"
           >
             Fechar

@@ -31,9 +31,6 @@ export default function EditReservation() {
     alert("Reserva atualizada com sucesso!");
   };
 
-  const handleClose = () => {
-    alert("Edição cancelada");
-  };
 
   return (
     <>
@@ -99,12 +96,12 @@ export default function EditReservation() {
               type="submit"
               className="w-1/2 bg-[#A8BBCD] text-white font-bold py-3 rounded-lg hover:bg-gray-400 transition cursor-pointer"
             >
-              Atualizar Reserva
+              Alterar Reserva
             </button>
             <button
               type="button"
               className="w-1/3 bg-red-600 text-white font-bold py-3 rounded-lg hover:bg-red-700 transition cursor-pointer"
-              onClick={handleClose}
+              onClick={() => window.location.href = "/#reservas"}
             >
               Fechar
             </button>
