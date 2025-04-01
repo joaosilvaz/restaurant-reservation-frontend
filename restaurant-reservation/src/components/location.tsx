@@ -2,7 +2,7 @@ const Location = () => {
     return (
       <section id="localizacao" className="bg-[#294056] text-center py-16 px-6">
         <h2 className="font-bold text-white mb-8 text-4xl">LOCALIZAÇÃO</h2>
-        <p className="text-white mb-6 text-2xl">
+        <p className="text-white mb-6 text-xl">
           Alameda Lorena, 2101 – Jardim Paulista, São Paulo - SP, 01424-007
         </p>
         <div className="w-full max-w-3xl mx-auto">
