@@ -22,7 +22,7 @@ export default function CreateReservation() {
   };
 
   return (
-    <div className="bg-[#294056] p-6 rounded-lg max-w-md mx-auto mt-10 text-white">
+    <div className="bg-black p-6 rounded-lg max-w-md mx-auto mt-10 text-white">
       <img
         src="/images/yamato-popup.png"
         alt="Yamato Sushi"

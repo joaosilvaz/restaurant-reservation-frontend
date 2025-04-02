@@ -9,7 +9,7 @@ export default function Reservation(props: ReservationProps) {
   const classActive = "";
 
   return (
-    <section id="reservas" className="bg-[#294056] text-white py-16 px-6">
+    <section id="reservas" className="bg-black text-white py-16 px-6">
       <div className="container mx-auto max-w-4xl">
         <h2 className="text-4xl font-bold text-center">RESERVAS</h2>
         <p className="text-center mt-6 text-white text-[20px]">
@@ -30,23 +30,23 @@ export default function Reservation(props: ReservationProps) {
           <div className="flex flex-col gap-4 items-end">
             <Link href="/create">
               <button
-                className={`w-64 bg-[#A8BBCD] text-white font-bold py-3 rounded-lg hover:bg-gray-400 transition cursor-pointer ${active === "create" ? classActive : ""}`}
+                className={`w-64 bg-white text-black font-bold py-3 rounded-lg hover:bg-zinc-200 transition cursor-pointer ${active === "create" ? classActive : ""}`}
               >
                 CRIAR RESERVA
               </button>
             </Link>
             <Link href="/edit">
-              <button className={`w-64 bg-[#A8BBCD] text-white font-bold py-3 rounded-lg hover:bg-gray-400 transition cursor-pointer ${active === "edit" ? classActive : ""}`}>
+              <button className={`w-64 bg-white text-black font-bold py-3 rounded-lg hover:bg-zinc-200 transition cursor-pointer ${active === "edit" ? classActive : ""}`}>
                 ALTERAR RESERVA
               </button>
             </Link>
             <Link href="/view-reservations">
-              <button className={`w-64 bg-[#A8BBCD] text-white font-bold py-3 rounded-lg hover:bg-gray-400 transition cursor-pointer ${active === "view" ? classActive : ""}`}>
+              <button className={`w-64 bg-white text-black font-bold py-3 rounded-lg hover:bg-zinc-200 transition cursor-pointer ${active === "view" ? classActive : ""}`}>
                 VER RESERVA
               </button>
             </Link>
             <Link href="/delete">
-              <button className={`w-64 bg-[#A8BBCD] text-white font-bold py-3 rounded-lg hover:bg-gray-400 transition cursor-pointer ${active === "delete" ? classActive : ""}`}>
+              <button className={`w-64 bg-white text-black font-bold py-3 rounded-lg hover:bg-zinc-200 transition cursor-pointer ${active === "delete" ? classActive : ""}`}>
                 EXCLUIR RESERVA
               </button>
             </Link>

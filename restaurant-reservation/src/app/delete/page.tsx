@@ -2,6 +2,11 @@
 import { useState } from "react";
 
 export default function DeleteReservation() {
+    const handleDelete = () => {
+        alert("Reserva excluída com sucesso!");
+        window.location.href = "/#reservas";
+    };
+
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-50">
             <div className="bg-[#1E3147] p-20 rounded-lg text-white max-w-xl w-full">
@@ -20,6 +25,7 @@ export default function DeleteReservation() {
 
                 <div className="flex justify-between mt-8">
                     <button
+                        onClick={handleDelete}
                         className="w-1/2 bg-white text-black font-bold py-3 rounded-lg hover:bg-gray-200 transition cursor-pointer"
                     >
                         Deletar Reserva

@@ -1,10 +1,11 @@
+"use client"
 import Link from "next/link";
 
 export default function Hero() {
     return (
-        <section className="relative h-[600px] bg-[url('/images/restaurant.png')] bg-contain bg-center">
+        <section className="relative h-[600px] bg-[url('/images/comida-japonesa.jpg')] bg-contain bg-center">
             <div className="absolute inset-0 bg-black/30 flex flex-col justify-between">
-                <nav className="container p-5 pl-12">
+                <nav className="container pt-3 pl-12">
                     <ul className="flex space-x-6 text-white font-semibold cursor-pointer text-[16px]">
                         <li><Link href="#home">Home</Link></li>
                         <li><Link href="#reservas">Reserva</Link></li>
@@ -12,12 +13,23 @@ export default function Hero() {
                         <li><Link href="#horarios">Horários</Link></li>
                     </ul>
                 </nav>
-                <div className="flex flex-grow items-center justify-center">
-                    <Link href="#reservas">
-                        <button className="bg-[#294056]/60 text-white text-[18px] px-6 py-3 font-semibold rounded-lg cursor-pointer hover:bg-[#294056]/80 transition">
+                <div className="flex flex-grow items-center justify-center flex-col text-center">
+                    <h1 className="text-white text-5xl mb-8 font-bold">O melhor rodízio <br /> de São Paulo</h1>
+                    <Link href="#reservas" scroll={false}>
+                        <button
+                            onClick={(e) => {
+                                e.preventDefault();
+                                const reservasSection = document.querySelector("#reservas");
+                                if (reservasSection) {
+                                    reservasSection.scrollIntoView({ behavior: "smooth" });
+                                }
+                            }}
+                            className="bg-black text-white text-[18px] px-6 py-3 font-semibold rounded-lg cursor-pointer hover:bg-black/80 transition"
+                        >
                             Faça sua reserva
                         </button>
                     </Link>
+
                 </div>
             </div>
         </section>
