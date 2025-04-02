@@ -30,23 +30,23 @@ export default function Reservation(props: ReservationProps) {
           <div className="flex flex-col gap-4 items-end">
             <Link href="/create">
               <button
-                className={`w-64 bg-white text-black font-bold py-3 rounded-lg hover:bg-zinc-200 transition cursor-pointer ${active === "create" ? classActive : ""}`}
+                className={`w-64 border-1 border-transparent bg-white text-black font-bold py-3 rounded-lg hover:bg-black hover:text-white hover:border-white transition cursor-pointer ${active === "create" ? classActive : ""}`}
               >
                 CRIAR RESERVA
               </button>
             </Link>
             <Link href="/edit">
-              <button className={`w-64 bg-white text-black font-bold py-3 rounded-lg hover:bg-zinc-200 transition cursor-pointer ${active === "edit" ? classActive : ""}`}>
+              <button className={`w-64 border-1 border-transparent bg-white text-black font-bold py-3 rounded-lg hover:bg-black hover:text-white hover:border-white transition cursor-pointer ${active === "edit" ? classActive : ""}`}>
                 ALTERAR RESERVA
               </button>
             </Link>
             <Link href="/view-reservations">
-              <button className={`w-64 bg-white text-black font-bold py-3 rounded-lg hover:bg-zinc-200 transition cursor-pointer ${active === "view" ? classActive : ""}`}>
+              <button className={`w-64 border-1 border-transparent bg-white text-black font-bold py-3 rounded-lg hover:bg-black hover:text-white hover:border-white transition cursor-pointer ${active === "view" ? classActive : ""}`}>
                 VER RESERVA
               </button>
             </Link>
             <Link href="/delete">
-              <button className={`w-64 bg-white text-black font-bold py-3 rounded-lg hover:bg-zinc-200 transition cursor-pointer ${active === "delete" ? classActive : ""}`}>
+              <button className={`w-64 border-1 border-transparent bg-white text-black font-bold py-3 rounded-lg hover:bg-black hover:text-white hover:border-white transition cursor-pointer ${active === "delete" ? classActive : ""}`}>
                 EXCLUIR RESERVA
               </button>
             </Link>

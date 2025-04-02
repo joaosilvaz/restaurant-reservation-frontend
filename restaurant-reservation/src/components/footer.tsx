@@ -26,7 +26,7 @@ export default function Footer() {
       </div>
 
       <p className="text-sm text-center mt-6">
-        &copy; 2025 Yamato Gourmet. Todos os direitos reservados.
+        &copy; 2025 Yamato Sushi. Todos os direitos reservados.
       </p>
     </footer>
   );

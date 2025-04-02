@@ -14,7 +14,7 @@ export default function Hero() {
                     </ul>
                 </nav>
                 <div className="flex flex-grow items-center justify-center flex-col text-center">
-                    <h1 className="text-white text-5xl mb-8 font-bold">O melhor rodízio <br /> de São Paulo</h1>
+                    <h1 className="text-white text-5xl mb-8 font-bold leading-snug">O melhor rodízio <br /> de São Paulo</h1>
                     <Link href="#reservas" scroll={false}>
                         <button
                             onClick={(e) => {
@@ -24,7 +24,7 @@ export default function Hero() {
                                     reservasSection.scrollIntoView({ behavior: "smooth" });
                                 }
                             }}
-                            className="bg-black text-white text-[18px] px-6 py-3 font-semibold rounded-lg cursor-pointer hover:bg-black/80 transition"
+                            className="bg-black text-white text-[18px] px-6 py-3 font-semibold rounded-lg cursor-pointer hover:bg-white hover:text-black transition-all duration-200"
                         >
                             Faça sua reserva
                         </button>
