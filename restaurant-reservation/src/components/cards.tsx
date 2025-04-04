@@ -23,11 +23,11 @@ export default function Card() {
   
         <p className="mt-10 text-lg">Faça seu pedido em nosso delivery</p>
         <div className="flex gap-4 mt-4">
-          <button className="flex items-center gap-2 px-4 py-2 border border-black rounded-full text-black">
-            🟢 Saikou Veleiros
+          <button className="flex items-center gap-2 px-4 py-2 border border-black hover:bg-black transition-all duration-200 hover:text-white rounded-full cursor-pointer text-black">
+             Yamato Aclimação
           </button>
-          <button className="flex items-center gap-2 px-4 py-2 border border-black rounded-full text-black">
-            🟢 Saikou Dutra
+          <button className="flex items-center gap-2 px-4 py-2 border border-black hover:bg-black transition-all duration-200 hover:text-white rounded-full cursor-pointer text-black">
+            Yamato Paulista
           </button>
         </div>
       </div>
