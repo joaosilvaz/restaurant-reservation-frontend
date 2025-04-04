@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Hero() {
     return (
-        <section className="relative h-[600px] bg-[url('/images/comida-japonesa.jpg')] bg-contain bg-center">
+        <section className="relative h-[900px] bg-[url('/images/comida-japonesa.jpg')] bg-cover bg-center">
             <div className="absolute inset-0 bg-black/30 flex flex-col justify-between">
                 <nav className="container pt-3 pl-12">
                     <ul className="flex space-x-6 text-white font-semibold cursor-pointer text-[16px]">

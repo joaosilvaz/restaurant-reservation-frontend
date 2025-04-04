@@ -7,6 +7,7 @@ import Footer from "@/components/footer";
 import OpeningHours from "@/components/openinghours";
 import Reservation from "@/components/reservation";
 import Carousel from "@/components/carousel";
+import Card from "@/components/cards";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
       <Header />
       <Hero />
       <About />
+      <Card />
       <Carousel />
       <Reservation active={"create"} />
       <Location />
