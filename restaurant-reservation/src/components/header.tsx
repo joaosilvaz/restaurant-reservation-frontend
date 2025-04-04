@@ -1,6 +1,6 @@
 export default function Header() {
   return (
-    <header className="flex w-full justify-between bg-black py-6 px-4">
+    <header className="fixed top-0 left-0 w-full z-50 bg-black backdrop-blur-md py-6 px-4 flex justify-between">
       <div className="flex flex-col pl-7">
         <h1 className="text-white text-5xl font-bold">YAMATO</h1>
         <h2 className="text-white text-xl text-center font-bold">Sushi</h2>

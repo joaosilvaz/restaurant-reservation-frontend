@@ -24,3 +24,9 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Cor da bolinha ativa */
+.swiper-pagination-bullet-active {
+  background-color: #FF8C00 !important; /* Laranja mais forte */
+  opacity: 1;
+}

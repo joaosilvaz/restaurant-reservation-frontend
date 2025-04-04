@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer className="bg-black text-white py-10 px-10">
+    <footer className="bg-[#080808] text-white py-10 px-10">
       <div className="flex justify-between items-start">
         <div>
           <h2 className="font-bold text-2xl">CONTATOS</h2>
