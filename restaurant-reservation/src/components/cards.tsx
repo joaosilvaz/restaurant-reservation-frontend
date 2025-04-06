@@ -1,36 +1,31 @@
 export default function Card() {
-    return (
-      <div className="flex flex-col items-center justify-center py-20">
-        <div className="flex flex-wrap gap-10 justify-center">
-          <div className="bg-orange-500 hover:bg-black transition-all duration-200 text-white p-10 rounded-2xl text-center w-64">
-            <div className="text-5xl">🤝</div>
-            <h2 className="text-xl font-bold mt-4">Atendimento</h2>
-            <p className="mt-2">Hospitalidade de excelência em uma atmosfera acolhedora.</p>
+  return (
+    <div className="flex flex-col items-center justify-center py-20">
+      <div className="flex flex-wrap gap-10 justify-center">
+        <div className="bg-orange-500 hover:bg-black transition-all duration-200 text-white p-10 rounded-2xl text-center w-70">
+          <div className="flex justify-center">
+            <img className="w-20 filter invert" src="/images/cliente.png" alt="Atendimento" />
           </div>
-  
-          <div className="bg-orange-500 hover:bg-black transition-all duration-200 text-white p-10 rounded-2xl text-center w-64">
-            <div className="text-5xl">🥤</div>
-            <h2 className="text-xl font-bold mt-4">Drinks</h2>
-            <p className="mt-2">Sabores exclusivos, uma experiência em cada gole.</p>
-          </div>
-  
-          <div className="bg-orange-500 hover:bg-black transition-all duration-200 text-white p-10 rounded-2xl text-center w-64">
-            <div className="text-5xl">🍽️</div>
-            <h2 className="text-xl font-bold mt-4">Pratos</h2>
-            <p className="mt-2">Hospitalidade de excelência em uma atmosfera acolhedora.</p>
-          </div>
+          <h2 className="text-xl font-bold mt-4">Atendimento Premium</h2>
+          <p className="mt-2">Cuidamos de cada detalhe para que você se sinta especial do início ao fim.</p>
         </div>
-  
-        <p className="mt-10 text-lg">Faça seu pedido em nosso delivery</p>
-        <div className="flex gap-4 mt-4">
-          <button className="flex items-center gap-2 px-4 py-2 border border-black hover:bg-black transition-all duration-200 hover:text-white rounded-full cursor-pointer text-black">
-             Yamato Aclimação
-          </button>
-          <button className="flex items-center gap-2 px-4 py-2 border border-black hover:bg-black transition-all duration-200 hover:text-white rounded-full cursor-pointer text-black">
-            Yamato Paulista
-          </button>
+
+        <div className="bg-orange-500 hover:bg-black transition-all duration-200 text-white p-10 rounded-2xl text-center w-70">
+          <div className="flex justify-center">
+            <img className="w-20 filter invert" src="/images/prato.png" alt="Prato" />
+          </div>
+          <h2 className="text-xl font-bold mt-4">Drinks</h2>
+          <p className="mt-2">Drinks autorais com um toque japonês, perfeitos para cada momento.</p>
+        </div>
+
+        <div className="bg-orange-500 hover:bg-black transition-all duration-200 text-white p-10 rounded-2xl text-center w-70">
+          <div className="flex justify-center">
+            <img className="w-20 filter invert" src="/images/coquetel.png" alt="Drinks" />
+          </div>
+          <h2 className="text-xl font-bold mt-4">Pratos</h2>
+          <p className="mt-2">Receitas autênticas com ingredientes frescos e apresentação impecável.</p>
         </div>
       </div>
-    );
-  }
-  
+    </div>
+  );
+}

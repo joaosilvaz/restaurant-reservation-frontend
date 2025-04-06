@@ -16,24 +16,24 @@ export default function Carousel() {
   ];
 
   return (
-    <div className="bg-[#080808] w-full mx-auto py-20">
+    <div className="bg-[#080808] w-full mx-auto py-20 px-4">
       <Swiper
-        slidesPerView={2}
-        spaceBetween={5}
+        slidesPerView="auto"
+        spaceBetween={20}
         loop={true}
         pagination={{ clickable: true }}
+      
         modules={[Pagination, Navigation]}
         className="mySwiper"
       >
         {images.map((src, index) => (
-          <SwiperSlide key={index} className="custom-slide">
+          <SwiperSlide key={index} className="!w-[320px]">
             <img
               src={src}
               alt={`Imagem ${index + 1}`}
-              className="w-[300px] h-[500px] object-cover rounded-lg shadow-md transition-all duration-300"
+              className="w-full h-[500px] object-cover rounded-lg shadow-md transition-all duration-300"
             />
           </SwiperSlide>
-
         ))}
       </Swiper>
     </div>

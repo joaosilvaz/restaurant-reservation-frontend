@@ -9,7 +9,7 @@ export default function DeleteReservation() {
 
     return (
         <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-50">
-            <div className="bg-[#1E3147] p-20 rounded-lg text-white max-w-xl w-full">
+            <div className="bg-black p-20 rounded-lg text-white max-w-xl w-full">
                 <h2 className="text-3xl font-bold text-center">
                     Tem certeza que deseja excluir esta reserva?
                 </h2>

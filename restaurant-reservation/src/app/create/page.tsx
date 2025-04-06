@@ -9,6 +9,29 @@ export default function CreateReservation() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
 
+  const getAllDates = () => {
+    const dates = [];
+    const start = new Date("2025-01-01");
+    const end = new Date("2025-12-31");
+
+    let current = start;
+    while (current <= end) {
+      dates.push(new Date(current));
+      current.setDate(current.getDate() + 1);
+    }
+
+    return dates.map((d) => ({
+      value: d.toISOString().split("T")[0],
+      label: d.toLocaleDateString("pt-BR", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+      }),
+    }));
+  };
+
+  const allDates = getAllDates();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -39,9 +62,11 @@ export default function CreateReservation() {
             className="w-full p-3 pl-10 bg-white text-gray-700 rounded-lg focus:outline-none"
           >
             <option value="">Dia da Reserva</option>
-            <option value="2024-09-20">20 de Setembro</option>
-            <option value="2024-09-21">21 de Setembro</option>
-            <option value="2024-09-22">22 de Setembro</option>
+            {allDates.map(({ value, label }) => (
+              <option key={value} value={value}>
+                {label}
+              </option>
+            ))}
           </select>
         </div>
 
@@ -94,7 +119,7 @@ export default function CreateReservation() {
           </button>
           <button
             type="button"
-            onClick={() => window.location.href = "/#reservas"}
+            onClick={() => (window.location.href = "/#reservas")}
             className="w-1/3 bg-red-600 text-white font-bold py-3 rounded-lg hover:bg-red-700 transition cursor-pointer"
           >
             Fechar
