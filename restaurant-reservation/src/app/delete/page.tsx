@@ -31,7 +31,7 @@ export default function DeleteReservation() {
                         Deletar Reserva
                     </button>
                     <button
-                        onClick={() => window.location.href = "/#reservas"}
+                        onClick={() => window.location.href = "/home#reservas"}
                         className="w-1/3 bg-orange-500 text-white font-bold py-3 rounded-lg hover:bg-white hover:text-black transition cursor-pointer"
                     >
                         Fechar

@@ -1,7 +1,7 @@
 export default function Location() {
 
   return (
-    <section id="localizacao" className="bg-[#0f0f0f] text-center pt-8 pb-20 px-6">
+    <section id="localizacao" className="bg-[#080808] text-center pt-8 pb-20 px-6">
       <h2 className="font-bold text-white mb-8 text-4xl">LOCALIZAÇÃO</h2>
       <p className="text-white mb-6 text-xl">
         Alameda Lorena, 2101 – Jardim Paulista, São Paulo - SP, 01424-007

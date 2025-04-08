@@ -117,14 +117,14 @@ export default function EditReservation() {
         <div className="flex justify-between mt-4">
           <button
             type="submit"
-            className="w-1/2 bg-[#A8BBCD] text-white font-bold py-3 rounded-lg hover:bg-gray-400 transition cursor-pointer"
+            className="w-1/2 bg-white text-black font-bold py-3 rounded-lg hover:bg-black hover:text-white hover:border border-white transition cursor-pointer"
           >
             Alterar Reserva
           </button>
           <button
             type="button"
-            className="w-1/3 bg-red-600 text-white font-bold py-3 rounded-lg hover:bg-red-700 transition cursor-pointer"
-            onClick={() => window.location.href = "/#reservas"}
+            className="w-1/3 bg-orange-500 text-white font-bold py-3 rounded-lg hover:bg-white hover:text-black transition cursor-pointer"
+            onClick={() => window.location.href = "/home#reservas"}
           >
             Fechar
           </button>

@@ -16,7 +16,7 @@ export default function Reservation(props: ReservationProps) {
           YAMATO • SUSHI • YAMATO • SUSHI • YAMATO • SUSHI • YAMATO • SUSHI •
           YAMATO • SUSHI • YAMATO • SUSHI • YAMATO • SUSHI • YAMATO • SUSHI •
         </div>
-      </div><section id="reservas" className="bg-[#0f0f0f] text-white py-22 px-6">
+      </div><section id="reservas" className="bg-[#080808] text-white py-22 px-6">
         <div className="container mx-auto max-w-4xl">
           <h2 className="text-4xl font-bold text-center">RESERVAS</h2>
           <p className="text-center mt-6 text-white text-[20px]">
