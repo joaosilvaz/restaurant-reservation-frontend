@@ -14,7 +14,7 @@ export interface Booking {
 }
 
 interface Props {
-  booking?: Booking; // torna a prop opcional
+  booking?: Booking; 
 }
 
 export default function ViewReservation({ booking }: Props) {

@@ -12,10 +12,6 @@ export default function LoginPage() {
         window.location.href = "https://accounts.google.com/signin";
     };
 
-    const handleFacebookLogin = () => {
-        window.location.href = "https://www.facebook.com/login.php";
-    };
-
     return (
         <div className="flex justify-center items-center min-h-screen w-full bg-cover bg-center bg-black/60" style={{
             backgroundImage: "url('/images/bg-cadastro.jpg')",
@@ -48,7 +44,7 @@ export default function LoginPage() {
                     </label>
                     <a href="#" className="text-blue-500 text-sm underline">Esqueceu sua senha?</a>
                 </div>
-                <a href={isFormValid ? "/home" : "#"} onClick={(e) => !isFormValid && e.preventDefault()}>
+                <a href={isFormValid ? "/" : "#"} onClick={(e) => !isFormValid && e.preventDefault()}>
                     <button
                         disabled={!isFormValid}
                         className={`w-full py-2 rounded-3xl transition border ${isFormValid
