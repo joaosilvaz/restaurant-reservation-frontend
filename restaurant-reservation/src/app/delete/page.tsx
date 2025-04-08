@@ -26,13 +26,13 @@ export default function DeleteReservation() {
                 <div className="flex justify-between mt-8">
                     <button
                         onClick={handleDelete}
-                        className="w-1/2 bg-white text-black font-bold py-3 rounded-lg hover:bg-gray-200 transition cursor-pointer"
+                        className="w-1/2 bg-white text-black font-bold py-3 rounded-lg hover:bg-black hover:text-white hover: border border-white transition cursor-pointer"
                     >
                         Deletar Reserva
                     </button>
                     <button
                         onClick={() => window.location.href = "/#reservas"}
-                        className="w-1/3 bg-red-600 text-white font-bold py-3 rounded-lg hover:bg-red-700 transition cursor-pointer"
+                        className="w-1/3 bg-orange-500 text-white font-bold py-3 rounded-lg hover:bg-white hover:text-black transition cursor-pointer"
                     >
                         Fechar
                     </button>

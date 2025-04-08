@@ -39,7 +39,7 @@ export default function EditReservation() {
   const [name, setName] = useState(reservaExistente.name);
   const [email, setEmail] = useState(reservaExistente.email);
 
-  const allDates = getAllDates(2025); // Você pode ajustar o ano aqui
+  const allDates = getAllDates(2025); 
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();

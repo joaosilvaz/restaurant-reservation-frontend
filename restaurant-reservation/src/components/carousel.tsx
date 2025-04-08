@@ -16,7 +16,7 @@ export default function Carousel() {
   ];
 
   return (
-    <div className="bg-[#080808] w-full mx-auto py-20 px-4">
+    <div className="bg-[#0f0f0f] w-full mx-auto py-20 px-4">
       <Swiper
         slidesPerView="auto"
         spaceBetween={20}

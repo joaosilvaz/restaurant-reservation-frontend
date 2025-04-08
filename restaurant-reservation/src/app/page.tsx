@@ -17,8 +17,8 @@ export default function Home() {
       <About />
       <Card />
       <Carousel />
-      <Reservation active={"create"} />
       <Location />
+      <Reservation active={"create"} />
       <OpeningHours />
       <Footer />
     </>

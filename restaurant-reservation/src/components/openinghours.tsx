@@ -1,7 +1,7 @@
 export default function OpeningHours() {
   return (
-    <section id="horarios" className="flex justify-center items-center py-12">
-      <div className="bg-[#080808] text-white p-10 rounded-lg w-[800px] h-[300px] text-center shadow-lg">
+    <section id="horarios" className="flex justify-center items-center py-12 bg-[url('/images/bg-hours.jpg')] bg-contain bg-center">
+      <div className="bg-white text-black p-10 rounded-lg w-[800px] h-[300px] text-center shadow-lg">
         <h2 className="text-2xl font-bold mb-4">Nosso Horário de Funcionamento:</h2>
         <p className="text-lg font-semibold mb-6">
           Venha Conhecer o Melhor Restaurante de São Paulo
