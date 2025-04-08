@@ -83,10 +83,11 @@ export default function CreateReservation() {
       }
 
       const data = await response.json();
-      alert("Reserva criado com sucesso!")
-      setCreatedBooking(data); 
+      alert("Reserva criada com sucesso!");
+      setCreatedBooking(data);
+      localStorage.setItem("reserva", JSON.stringify(data)); // salva a reserva
       setShowModal(true);
-    
+
 
     } catch (error) {
       console.error("Erro ao enviar reserva:", error);
