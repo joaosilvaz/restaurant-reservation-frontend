@@ -63,13 +63,6 @@ export default function SignupPage() {
         >
           <img src="images/google.svg" alt="Google" className="w-5 h-5 mr-2" /> Continue com Google
         </button>
-
-        <button 
-          onClick={handleFacebookRegister}
-          className="w-full flex items-center justify-center border border-blue-600 text-blue-600 py-2 rounded-3xl hover:bg-blue-600 hover:text-white transition cursor-pointer"
-        >
-          <img src="images/facebook.svg" alt="Facebook" className="w-5 h-5 mr-2" /> Continue com Facebook
-        </button>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 
 import Hero from "@/components/banner";
-import Header from "../../components/header";
+import Header from "../components/header";
 import About from "@/components/about";
 import Location from "@/components/location";
 import Footer from "@/components/footer";
