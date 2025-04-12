@@ -1,11 +1,9 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 interface Booking {
     id: number;
-    user: string;
     telefoneCliente: string;
-    emailCliente: string;
     dataReserva: string;
     horaReserva: string;
     quantidadePessoas: number;
@@ -26,6 +24,13 @@ export default function DeleteReservation() {
     const handleDelete = async () => {
         if (!booking) return;
 
+        const isConfirmed = window.confirm(
+            "Tem certeza que deseja excluir esta reserva? Esta ação não pode ser desfeita."
+        );
+
+        if (!isConfirmed) {
+            return;
+        }
         try {
             const response = await fetch(`http://localhost:8080/bookings/${booking.id}`, {
                 method: "DELETE",
@@ -45,7 +50,6 @@ export default function DeleteReservation() {
             alert("Erro inesperado ao excluir reserva.");
         }
     };
-
 
     if (!booking) {
         return (
@@ -75,24 +79,22 @@ export default function DeleteReservation() {
                 </p>
 
                 <div className="mt-10 text-lg text-center">
-                    <p>📅 <b>Data:</b> {booking.dataReserva}</p>
-                    <p>⏰ <b>Horário:</b> {booking.horaReserva}</p>
-                    <p>👥 <b>Pessoas:</b> {booking.quantidadePessoas}</p>
-                    <p>📞 <b>Telefone:</b> {booking.telefoneCliente}</p>
-                    <p>🙍‍♂️ <b>Nome:</b> {booking.user}</p>
-                    <p>📧 <b>Email:</b> {booking.emailCliente}</p>
+                    <p><b>Data:</b> {booking.dataReserva}</p>
+                    <p><b>Horário:</b> {booking.horaReserva}</p>
+                    <p><b>Pessoas:</b> {booking.quantidadePessoas}</p>
+                    <p><b>Telefone:</b> {booking.telefoneCliente}</p>
                 </div>
 
-                <div className="flex justify-between mt-12">
+                <div className="flex justify-between mt-12 gap-4">
                     <button
-                        onClick={handleDelete}
+                        onClick={handleDelete} // Chama a função handleDelete ao clicar no botão
                         className="w-1/2 bg-white text-black font-bold py-3 rounded-lg hover:bg-black hover:text-white border border-white transition cursor-pointer"
                     >
                         Excluir Reserva
                     </button>
                     <button
                         onClick={() => (window.location.href = "/#reservas")}
-                        className="w-1/3 bg-orange-500 text-white font-bold py-3 rounded-lg hover:bg-white hover:text-black transition cursor-pointer"
+                        className="w-1/3 bg-orange-500 text-white font-bold py-3 rounded-lg hover:bg-orange-600 transition cursor-pointer"
                     >
                         Fechar
                     </button>

@@ -1,12 +1,10 @@
 "use client";
-import { useState } from "react";
 import ViewReservation from "@/app/view-reservations/page"; // Importa o modal
+import { useState } from "react";
 
 interface Booking {
   id: number;
-  user: string;
   telefoneCliente: string;
-  emailCliente: string;
   dataReserva: string;
   horaReserva: string;
   quantidadePessoas: number;
@@ -19,8 +17,6 @@ export default function CreateReservation() {
   const [time, setTime] = useState("");
   const [people, setPeople] = useState("");
   const [phone, setPhone] = useState("");
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
   const [mesa, setMesa] = useState("");
   const [createdBooking, setCreatedBooking] = useState<Booking | null>(null);
   const [showModal, setShowModal] = useState(false);
@@ -51,15 +47,13 @@ export default function CreateReservation() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!date || !time || !people || !phone || !name || !email || !mesa) {
+    if (!date || !time || !people || !phone || !mesa) {
       alert("Por favor, preencha todos os campos antes de criar a reserva.");
       return;
     }
 
     const novaReserva = {
-      user: name,
       telefoneCliente: phone,
-      emailCliente: email,
       dataReserva: date,
       horaReserva: time,
       quantidadePessoas: parseInt(people),
@@ -137,20 +131,6 @@ export default function CreateReservation() {
           className="w-full p-3 bg-white text-gray-700 rounded-lg"
           placeholder="Telefone"
           maxLength={20} />
-
-        <input type="text"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          className="w-full p-3 bg-white text-gray-700 rounded-lg"
-          placeholder="Nome"
-          maxLength={50} />
-
-        <input type="email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full p-3 bg-white text-gray-700 rounded-lg"
-          placeholder="Email"
-          maxLength={30} />
 
         <div className="flex justify-between mt-4">
           <button type="submit"

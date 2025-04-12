@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 type Booking = {
   user: string;
@@ -85,7 +85,7 @@ export default function EditReservation({ booking }: Props) {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-60 z-50">
+    <div className="inset-0 flex items-center justify-center bg-white bg-opacity-60 z-50">
       <div className="bg-black rounded-lg max-w-md mx-auto text-white relative w-full">
         <img
           src="/images/bg-cadastro.jpg"
@@ -127,7 +127,7 @@ export default function EditReservation({ booking }: Props) {
             min={1}
             placeholder="Pessoas"
           />
-          
+
           <input
             type="number"
             value={mesa}

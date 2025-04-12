@@ -1,11 +1,9 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export interface Booking {
   id: number;
-  user: string;
   telefoneCliente: string;
-  emailCliente: string;
   dataReserva: string;
   horaReserva: string;
   quantidadePessoas: number;
@@ -14,7 +12,7 @@ export interface Booking {
 }
 
 interface Props {
-  booking?: Booking; 
+  booking?: Booking;
 }
 
 export default function ViewReservation({ booking }: Props) {
@@ -50,12 +48,10 @@ export default function ViewReservation({ booking }: Props) {
       <div className="bg-black p-12 rounded-lg text-white max-w-xl w-full">
         <h2 className="text-3xl font-bold text-center">Sua reserva:</h2>
         <div className="mt-10 text-lg text-center">
-          <p>📅 <b>Data:</b> {reserva.dataReserva}</p>
-          <p>⏰ <b>Horário:</b> {reserva.horaReserva}</p>
-          <p>👥 <b>Pessoas:</b> {reserva.quantidadePessoas}</p>
-          <p>📞 <b>Telefone:</b> {reserva.telefoneCliente}</p>
-          <p>🙍‍♂️ <b>Nome:</b> {reserva.user}</p>
-          <p>📧 <b>Email:</b> {reserva.emailCliente}</p>
+          <p> <b>Data:</b> {reserva.dataReserva}</p>
+          <p> <b>Horário:</b> {reserva.horaReserva}</p>
+          <p> <b>Pessoas:</b> {reserva.quantidadePessoas}</p>
+          <p> <b>Telefone:</b> {reserva.telefoneCliente}</p>
         </div>
 
         <div className="flex justify-center gap-10 mt-12">
