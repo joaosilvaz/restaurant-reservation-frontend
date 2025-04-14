@@ -1,105 +1,110 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
-interface Booking {
-    id: number;
-    telefoneCliente: string;
-    dataReserva: string;
-    horaReserva: string;
-    quantidadePessoas: number;
-    status: boolean;
-    mesa: number;
-}
+export default function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const router = useRouter();
 
-export default function DeleteReservation() {
-    const [booking, setBooking] = useState<Booking | null>(null);
+  const isFormValid =
+    email.trim() !== "" &&
+    email.includes("@") &&
+    password.trim() !== "";
 
-    useEffect(() => {
-        const reserva = localStorage.getItem("reserva");
-        if (reserva) {
-            setBooking(JSON.parse(reserva));
-        }
-    }, []);
+  const handleGoogleLogin = () => {
+    window.location.href = "https://accounts.google.com/signin";
+  };
 
-    const handleDelete = async () => {
-        if (!booking) return;
+  const handleLogin = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/usuarios", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email,
+          password,
+        }),
+      });
 
-        const isConfirmed = window.confirm(
-            "Tem certeza que deseja excluir esta reserva? Esta ação não pode ser desfeita."
-        );
-
-        if (!isConfirmed) {
-            return;
-        }
-        try {
-            const response = await fetch(`http://localhost:8080/bookings/${booking.id}`, {
-                method: "DELETE",
-            });
-
-            if (response.ok) {
-                alert("Reserva excluída com sucesso!");
-                localStorage.removeItem("reserva");
-                window.location.href = "/#reservas";
-            } else {
-                const errorText = await response.text();
-                console.error("Erro ao excluir reserva:", errorText);
-                alert("Erro ao excluir reserva: " + errorText);
-            }
-        } catch (error) {
-            console.error("Erro ao deletar reserva:", error);
-            alert("Erro inesperado ao excluir reserva.");
-        }
-    };
-
-    if (!booking) {
-        return (
-            <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-50">
-                <div className="bg-black p-12 rounded-lg text-white max-w-xl w-full text-center">
-                    <h2 className="text-2xl font-bold">Reserva não encontrada</h2>
-                    <button
-                        onClick={() => (window.location.href = "/#reservas")}
-                        className="mt-6 bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-white hover:text-black cursor-pointer transition"
-                    >
-                        Fechar
-                    </button>
-                </div>
-            </div>
-        );
+      if (response.ok) {
+        // Aqui você pode redirecionar para a página principal
+        router.push("/");
+      } else {
+        alert("Email ou senha incorretos.");
+      }
+    } catch (error) {
+      console.error("Erro ao fazer login:", error);
+      alert("Erro ao conectar com a API.");
     }
+  };
 
-    return (
-        <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-50">
-            <div className="bg-black p-12 rounded-lg text-white max-w-xl w-full">
-                <h2 className="text-3xl font-bold text-center">
-                    Tem certeza que deseja excluir esta reserva?
-                </h2>
-                <p className="text-base text-white text-center mt-6">
-                    Essa ação não pode ser desfeita. Após a exclusão, os detalhes da
-                    reserva serão permanentemente removidos do sistema.
-                </p>
-
-                <div className="mt-10 text-lg text-center">
-                    <p><b>Data:</b> {booking.dataReserva}</p>
-                    <p><b>Horário:</b> {booking.horaReserva}</p>
-                    <p><b>Pessoas:</b> {booking.quantidadePessoas}</p>
-                    <p><b>Telefone:</b> {booking.telefoneCliente}</p>
-                </div>
-
-                <div className="flex justify-between mt-12 gap-4">
-                    <button
-                        onClick={handleDelete} // Chama a função handleDelete ao clicar no botão
-                        className="w-1/2 bg-white text-black font-bold py-3 rounded-lg hover:bg-black hover:text-white border border-white transition cursor-pointer"
-                    >
-                        Excluir Reserva
-                    </button>
-                    <button
-                        onClick={() => (window.location.href = "/#reservas")}
-                        className="w-1/3 bg-orange-500 text-white font-bold py-3 rounded-lg hover:bg-orange-600 transition cursor-pointer"
-                    >
-                        Fechar
-                    </button>
-                </div>
-            </div>
+  return (
+    <div
+      className="flex justify-center items-center min-h-screen w-full bg-cover bg-center bg-black/60"
+      style={{
+        backgroundImage: "url('/images/bg-cadastro.jpg')",
+        backgroundBlendMode: "darken",
+      }}
+    >
+      <div className="bg-white p-8 rounded-2xl shadow-lg max-w-[500px] w-full">
+        <h2 className="text-2xl font-bold text-center mb-4 text-black pb-3">
+          BEM VINDO DE VOLTA!
+        </h2>
+        <p className="text-left text-sm text-gray-600 mb-6">
+          Novo aqui?{" "}
+          <a href="/cadastro" className="text-blue-500 underline">
+            Crie sua conta aqui!
+          </a>
+        </p>
+        <input
+          type="email"
+          placeholder="Digite seu Email"
+          maxLength={50}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full px-4 py-2 border border-gray-950 rounded-3xl mb-4 text-gray-500"
+        />
+        <input
+          type="password"
+          placeholder="Digite sua Senha"
+          maxLength={30}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+          className="w-full px-4 py-2 border border-gray-950 rounded-3xl mb-4 text-gray-500"
+        />
+        <div className="flex justify-between items-center mb-4">
+          <label className="flex items-center text-sm text-gray-600">
+            <input type="checkbox" className="mr-2 cursor-pointer" /> Lembre-me
+          </label>
+          <a href="#" className="text-blue-500 text-sm underline">
+            Esqueceu sua senha?
+          </a>
         </div>
-    );
+
+        <button
+          onClick={handleLogin}
+          disabled={!isFormValid}
+          className={`w-full py-2 rounded-3xl transition border ${isFormValid
+            ? "bg-black text-white hover:bg-white hover:text-black hover:border-black cursor-pointer"
+            : "bg-black text-white cursor-not-allowed"
+            }`}
+        >
+          ENTRAR
+        </button>
+
+        <div className="text-center my-4 text-gray-500">OR</div>
+
+        <button
+          onClick={handleGoogleLogin}
+          className="w-full flex items-center justify-center border border-orange-500 text-orange-500 py-2 rounded-3xl mb-2 hover:bg-orange-500 hover:text-white transition cursor-pointer"
+        >
+          <img src="images/google.svg" alt="Google" className="w-5 h-5 mr-2" />{" "}
+          Continue com Google
+        </button>
+      </div>
+    </div>
+  );
 }

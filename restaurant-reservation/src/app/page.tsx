@@ -1,4 +1,4 @@
-
+"use client"
 import Hero from "@/components/banner";
 import Header from "../components/header";
 import About from "@/components/about";

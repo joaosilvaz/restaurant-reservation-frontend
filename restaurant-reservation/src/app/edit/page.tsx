@@ -145,22 +145,6 @@ export default function EditReservation({ booking }: Props) {
             placeholder="Telefone"
           />
 
-          <input
-            type="text"
-            value={user}
-            onChange={(e) => setUser(e.target.value)}
-            className="w-full p-3 bg-white text-gray-700 rounded-lg focus:outline-none"
-            placeholder="Nome"
-          />
-
-          <input
-            type="email"
-            value={emailCliente}
-            onChange={(e) => setEmailCliente(e.target.value)}
-            className="w-full p-3 bg-white text-gray-700 rounded-lg focus:outline-none"
-            placeholder="Email"
-          />
-
           <div className="flex justify-between mt-4">
             <button
               type="submit"

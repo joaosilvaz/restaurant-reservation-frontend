@@ -1,15 +1,36 @@
 "use client";
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const router = useRouter();
 
-  const isFormValid = email.trim() !== "" && password.trim() !== "";
+  const isFormValid = email.trim() !== "" && email.includes("@") && password.trim() !== "";
 
-  const handleGoogleLogin = () => {
-    window.location.href = "https://accounts.google.com/signin";
+  const handleLogin = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+
+    try {
+      const response = await fetch("http://localhost:8080/usuarios");
+      const users = await response.json();
+
+      const user = users.find((u: any) => u.emailCliente === email && u.senha === password);
+
+
+      if (user) {
+        router.push("/");
+      } else {
+        setError("Email ou senha incorretos.");
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Erro ao conectar com o servidor.");
+    }
   };
 
   return (
@@ -30,35 +51,26 @@ export default function LoginPage() {
             Crie sua conta aqui!
           </Link>
         </p>
-        <input
-          type="email"
-          placeholder="Digite seu Email"
-          maxLength={50}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full px-4 py-2 border border-gray-950 rounded-3xl mb-4 text-gray-500"
-        />
-        <input
-          type="password"
-          placeholder="Digite sua Senha"
-          maxLength={30}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full px-4 py-2 border border-gray-950 rounded-3xl mb-4 text-gray-500"
-        />
-        <div className="flex justify-between items-center mb-4">
-          <label className="flex items-center text-sm text-gray-600">
-            <input type="checkbox" className="mr-2 cursor-pointer" /> Lembre-me
-          </label>
-          <a href="#" className="text-blue-500 text-sm underline">
-            Esqueceu sua senha?
-          </a>
-        </div>
-        <Link
-          href={isFormValid ? "/" : "#"}
-          onClick={(e) => !isFormValid && e.preventDefault()}
-        >
+        <form onSubmit={handleLogin}>
+          <input
+            type="email"
+            placeholder="Digite seu Email"
+            maxLength={50}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full px-4 py-2 border border-gray-950 rounded-3xl mb-4 text-gray-500"
+          />
+          <input
+            type="password"
+            placeholder="Digite sua Senha"
+            maxLength={30}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full px-4 py-2 border border-gray-950 rounded-3xl mb-4 text-gray-500"
+          />
+          {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
           <button
+            type="submit"
             disabled={!isFormValid}
             className={`w-full py-2 rounded-3xl transition border ${
               isFormValid
@@ -68,14 +80,15 @@ export default function LoginPage() {
           >
             ENTRAR
           </button>
-        </Link>
-        <div className="text-center my-4 text-gray-500">OR</div>
+        </form>
+
+        <div className="text-center my-4 text-gray-500">OU</div>
 
         <button
-          onClick={handleGoogleLogin}
+          onClick={() => window.location.href = "https://accounts.google.com/signin"}
           className="w-full flex items-center justify-center border border-orange-500 text-orange-500 py-2 rounded-3xl mb-2 hover:bg-orange-500 hover:text-white transition cursor-pointer"
         >
-          <img src="images/google.svg" alt="Google" className="w-5 h-5 mr-2" />{" "}
+          <img src="images/google.svg" alt="Google" className="w-5 h-5 mr-2" />
           Continue com Google
         </button>
       </div>

@@ -8,6 +8,7 @@ export default function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState("");
   const router = useRouter();
 
   const isFormValid =
@@ -17,8 +18,33 @@ export default function SignupPage() {
     confirmPassword.trim() !== "" &&
     password === confirmPassword;
 
-  const handleGoogleRegister = () => {
-    window.location.href = "https://accounts.google.com/signin";
+  const handleSignup = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setError("");
+
+    try {
+      const response = await fetch("http://localhost:8080/usuarios", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          nome: name,
+          emailCliente: email,
+          senha: password // ou "false" dependendo da lógica
+        }),
+      });
+
+
+      if (response.ok) {
+        router.push("/login");
+      } else {
+        setError("Erro ao criar conta. Tente novamente.");
+      }
+    } catch (err) {
+      console.error(err);
+      setError("Erro ao conectar com o servidor.");
+    }
   };
 
   return (
@@ -40,7 +66,7 @@ export default function SignupPage() {
           </Link>
         </p>
 
-        <form>
+        <form onSubmit={handleSignup}>
           <input
             type="text"
             placeholder="Digite seu Nome"
@@ -72,39 +98,24 @@ export default function SignupPage() {
             onChange={(e) => setConfirmPassword(e.target.value)}
             className="w-full px-4 py-2 border mb-4 border-gray-950 rounded-3xl text-gray-500"
           />
+          {error && <p className="text-red-500 text-sm mb-2">{error}</p>}
 
-          <div className="flex justify-between items-center mb-4">
-            <label className="flex items-center text-sm text-gray-600">
-              <input type="checkbox" className="mr-2 cursor-pointer" />{" "}
-              Lembre-me
-            </label>
-            <a href="#" className="text-blue-500 text-sm underline">
-              Esqueceu sua senha?
-            </a>
-          </div>
-
-          <Link
-            href={isFormValid ? "/" : "#"}
-            onClick={(e) => !isFormValid && e.preventDefault()}
-          >
-            <button
-              type="submit"
-              disabled={!isFormValid}
-              className={`w-full py-2 rounded-3xl transition border ${
-                isFormValid
-                  ? "bg-black text-white hover:bg-white hover:text-black hover:border-black cursor-pointer"
-                  : "bg-black text-white cursor-not-allowed"
+          <button
+            type="submit"
+            disabled={!isFormValid}
+            className={`w-full py-2 rounded-3xl transition border ${isFormValid
+              ? "bg-black text-white hover:bg-white hover:text-black hover:border-black cursor-pointer"
+              : "bg-black text-white cursor-not-allowed"
               }`}
-            >
-              CRIAR
-            </button>
-          </Link>
+          >
+            CRIAR
+          </button>
         </form>
 
         <div className="text-center my-4 text-gray-500">OU</div>
 
         <button
-          onClick={handleGoogleRegister}
+          onClick={() => window.location.href = "https://accounts.google.com/signin"}
           className="w-full flex items-center justify-center border border-orange-500 text-orange-500 py-2 rounded-3xl mb-2 hover:bg-orange-500 hover:text-white transition cursor-pointer"
         >
           <img src="/images/google.svg" alt="Google" className="w-5 h-5 mr-2" />
