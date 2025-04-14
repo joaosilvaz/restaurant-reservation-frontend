@@ -2,9 +2,7 @@
 import { useEffect, useState } from "react";
 
 type Booking = {
-  user: string;
   telefoneCliente: string;
-  emailCliente: string;
   dataReserva: string;
   horaReserva: string;
   quantidadePessoas: number;
@@ -42,8 +40,8 @@ export default function EditReservation({ booking }: Props) {
   const [horaReserva, setHoraReserva] = useState("");
   const [quantidadePessoas, setQuantidadePessoas] = useState(1);
   const [telefoneCliente, setTelefoneCliente] = useState("");
-  const [user, setUser] = useState("");
-  const [emailCliente, setEmailCliente] = useState("");
+  // const [user, setUser] = useState("");
+  // const [emailCliente, setEmailCliente] = useState("");
   const [mesa, setMesa] = useState(0);
 
   useEffect(() => {
@@ -52,8 +50,6 @@ export default function EditReservation({ booking }: Props) {
       setHoraReserva(booking.horaReserva);
       setQuantidadePessoas(booking.quantidadePessoas);
       setTelefoneCliente(booking.telefoneCliente);
-      setUser(booking.user);
-      setEmailCliente(booking.emailCliente);
       setMesa(booking.mesa);
     }
   }, [booking]);
@@ -63,15 +59,20 @@ export default function EditReservation({ booking }: Props) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!dataReserva || !horaReserva || !quantidadePessoas || !telefoneCliente || !user || !emailCliente) {
-      alert("Por favor, preencha todos os campos antes de atualizar a reserva.");
+    const isValid =
+      dataReserva.trim() !== "" &&
+      horaReserva.trim() !== "" &&
+      telefoneCliente.trim() !== "" &&
+      quantidadePessoas > 0 &&
+      mesa >= 0;
+
+    if (!isValid) {
+      alert("Por favor, preencha todos os campos corretamente antes de atualizar a reserva.");
       return;
     }
 
     const reservaAtualizada: Booking = {
-      user,
       telefoneCliente,
-      emailCliente,
       dataReserva,
       horaReserva,
       quantidadePessoas,
@@ -79,14 +80,35 @@ export default function EditReservation({ booking }: Props) {
       mesa,
     };
 
-    console.log("Reserva atualizada:", reservaAtualizada);
-    alert("Reserva atualizada com sucesso!");
-    window.location.href = "/#reservas";
+    // Aqui acontece a atualização real na API
+    fetch(`http://localhost:8080/bookings/${booking.mesa}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(reservaAtualizada),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Erro ao atualizar a reserva.");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("Reserva atualizada com sucesso:", data);
+        alert("Reserva atualizada com sucesso!");
+        window.location.href = "/#reservas";
+      })
+      .catch((error) => {
+        console.error("Erro ao atualizar a reserva:", error);
+        alert("Erro ao atualizar a reserva. Verifique o console para mais detalhes.");
+      });
   };
+
 
   return (
     <div className="inset-0 flex items-center justify-center bg-white bg-opacity-60 z-50">
-      <div className="bg-black rounded-lg max-w-md mx-auto text-white relative w-full">
+      <div className="bg-black rounded-lg max-w-md mx-auto mt-10 text-white relative w-full">
         <img
           src="/images/bg-cadastro.jpg"
           alt="Yamato Sushi"
@@ -124,7 +146,6 @@ export default function EditReservation({ booking }: Props) {
             value={quantidadePessoas}
             onChange={(e) => setQuantidadePessoas(parseInt(e.target.value))}
             className="w-full p-3 bg-white text-gray-700 rounded-lg focus:outline-none"
-            min={1}
             placeholder="Pessoas"
           />
 
@@ -134,7 +155,6 @@ export default function EditReservation({ booking }: Props) {
             onChange={(e) => setMesa(parseInt(e.target.value))}
             className="w-full p-3 bg-white text-gray-700 rounded-lg focus:outline-none"
             placeholder="Mesa"
-            min={0}
           />
 
           <input

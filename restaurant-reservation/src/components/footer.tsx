@@ -1,6 +1,20 @@
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function Footer() {
+  const router = useRouter();
+
+  const handleLogout = () => {
+    const confirmLogout = window.confirm("Tem certeza que deseja sair?");
+    if (!confirmLogout) return;
+
+    // Limpa o token do localStorage (ou qualquer dado de autenticação)
+    localStorage.removeItem("token");
+
+    // Redireciona para a página de login
+    router.push("/login");
+  };
+
   return (
     <footer className="bg-[#080808]  text-white py-12 px-6">
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 items-center gap-8">
@@ -36,9 +50,19 @@ export default function Footer() {
       <div className="mt-10 text-center text-sm text-zinc-400">
         © 2025 Yamato Sushi. Todos os direitos reservados.
       </div>
+
+      <div
+        className="bg-[#ffffff] p-2 rounded-full fixed bottom-7 right-7 cursor-pointer border border-black"
+        onClick={handleLogout}
+      >
+        <img
+          src="/images/logout.png"
+          alt="Logout"
+          width={20}
+          height={20}
+          className="transition-all"
+        />
+      </div>
     </footer>
-
   );
-};
-
-
+}
