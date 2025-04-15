@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 type Booking = {
   telefoneCliente: string;
@@ -43,6 +44,8 @@ export default function EditReservation({ booking }: Props) {
   // const [user, setUser] = useState("");
   // const [emailCliente, setEmailCliente] = useState("");
   const [mesa, setMesa] = useState(0);
+
+  const router = useRouter();
 
   useEffect(() => {
     if (booking) {
@@ -175,7 +178,7 @@ export default function EditReservation({ booking }: Props) {
             <button
               type="button"
               className="w-1/3 bg-orange-500 text-white font-bold py-3 rounded-lg hover:bg-white hover:text-black transition cursor-pointer"
-              onClick={() => window.location.href = "/#reservas"}
+              onClick={() => router.push("/#reservas")}
             >
               Fechar
             </button>

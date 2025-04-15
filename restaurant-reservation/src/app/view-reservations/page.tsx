@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useRouter} from "next/navigation";
 
 export interface Booking {
   id: number;
@@ -17,6 +18,7 @@ interface Props {
 
 export default function ViewReservation({ booking }: Props) {
   const [reserva, setReserva] = useState<Booking | null>(booking ?? null);
+  const router = useRouter();
 
   useEffect(() => {
     if (!reserva) {
@@ -56,7 +58,7 @@ export default function ViewReservation({ booking }: Props) {
 
         <div className="flex justify-center gap-10 mt-12">
           <button
-            onClick={() => (window.location.href = "/#reservas")}
+            onClick={() => router.push("/#reservas")}
             className="w-1/3 bg-orange-500 text-white font-bold py-3 rounded-lg hover:bg-white hover:text-black transition cursor-pointer"
           >
             Fechar

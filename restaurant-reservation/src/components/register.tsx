@@ -35,9 +35,14 @@ export default function SignupPage() {
         }),
       });
 
+      if (response.status === 409) {
+        setError("Este e-mail já está cadastrado.");
+        return;
+      }
 
       if (response.ok) {
-        router.push("/login");
+        alert('Conta criada com sucesso!')
+        router.push("/");
       } else {
         setError("Erro ao criar conta. Tente novamente.");
       }

@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 interface Booking {
     id: number;
@@ -13,6 +14,7 @@ interface Booking {
 
 export default function DeleteReservation() {
     const [booking, setBooking] = useState<Booking | null>(null);
+    const router = useRouter()
 
     useEffect(() => {
         const reserva = localStorage.getItem("reserva");
@@ -93,8 +95,8 @@ export default function DeleteReservation() {
                         Excluir Reserva
                     </button>
                     <button
-                        onClick={() => (window.location.href = "/#reservas")}
-                        className="w-1/3 bg-orange-500 text-white font-bold py-3 rounded-lg hover:bg-orange-600 transition cursor-pointer"
+                        onClick={() => router.push("/#reservas")}
+                        className="w-1/3 bg-orange-500 text-white font-bold py-3 rounded-lg hover:bg-white hover:text-black transition cursor-pointer"
                     >
                         Fechar
                     </button>
