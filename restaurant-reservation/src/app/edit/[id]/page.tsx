@@ -42,13 +42,11 @@ export default function EditReservation() {
   const { id } = useParams(); // pega o id da URL
   const [booking, setBooking] = useState<Booking | null>(null);
   const [loading, setLoading] = useState(true);
-
   const [dataReserva, setDataReserva] = useState("");
   const [horaReserva, setHoraReserva] = useState("");
   const [quantidadePessoas, setQuantidadePessoas] = useState<number | "">("");
   const [mesa, setMesa] = useState<number | "">("");
   const [telefoneCliente, setTelefoneCliente] = useState("");
-
   const router = useRouter();
 
   useEffect(() => {
@@ -70,19 +68,15 @@ export default function EditReservation() {
         });
     }
   }, [id]);
-
   if (loading)
     return <div className="text-white text-center mt-10">Carregando...</div>;
-
   if (!booking)
     return (
       <div className="text-red-500 text-center mt-10">
         Reserva não encontrada.
       </div>
     );
-
   const allDates = getAllDates(2025);
-
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
