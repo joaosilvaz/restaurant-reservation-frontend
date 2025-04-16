@@ -137,7 +137,7 @@ export default function CreateReservation() {
 
         <div className="flex justify-between mt-4">
           <button type="submit"
-            className="w-1/2 bg-white text-black font-bold py-3 rounded-lg hover:bg-black hover:text-white hover:border border-white transition cursor-pointer">
+            className="w-1/2 bg-white text-black border border-transparent font-bold py-3 rounded-lg hover:bg-black hover:text-white hover:border-white transition cursor-pointer">
             Criar Reserva
           </button>
           <button type="button"

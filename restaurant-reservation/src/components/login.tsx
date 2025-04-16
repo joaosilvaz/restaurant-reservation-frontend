@@ -16,7 +16,7 @@ export default function LoginPage() {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:8080/usuarios");
+      const response = await fetch("http://localhost:8080/users");
       const users = await response.json();
 
       const user = users.find((u: any) => u.emailCliente === email && u.senha === password);
@@ -48,7 +48,7 @@ export default function LoginPage() {
         <p className="text-left text-sm text-gray-600 mb-6">
           Novo aqui?{" "}
           <Link href="/cadastro" className="text-blue-500 underline">
-            Crie sua conta aqui!
+            Crie sua conta!
           </Link>
         </p>
         <form onSubmit={handleLogin}>

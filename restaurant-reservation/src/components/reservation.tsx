@@ -49,7 +49,7 @@ export default function Reservation(props: ReservationProps) {
               </Link> */}
               <Link href="/view-reservations">
                 <button className={`w-64 border-1 border-transparent bg-white text-black font-bold py-3 rounded-lg hover:bg-black hover:text-white hover:border-white transition cursor-pointer ${active === "view" ? classActive : ""}`}>
-                  VER RESERVA
+                  GERENCIAR RESERVA
                 </button>
               </Link>
               {/* <Link href="/delete">

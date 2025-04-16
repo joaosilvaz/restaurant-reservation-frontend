@@ -32,7 +32,7 @@ export default function ViewReservation({ booking }: Props) {
   const handleEdit = () => {
     if (reserva) {
       localStorage.setItem("reserva", JSON.stringify(reserva));
-      router.push(`/edit/${reserva.id}`); 
+      router.push(`/edit/${reserva.id}`);
     }
   };
 
@@ -67,7 +67,7 @@ export default function ViewReservation({ booking }: Props) {
 
   if (!reserva) {
     return (
-      <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-50">
+      <div className="fixed inset-0 flex items-center justify-center bg-[url('/images/bg-cadastro.jpg')] bg-no-repeat bg-cover bg-opacity-50">
         <div className="bg-black p-12 rounded-lg text-white max-w-xl w-full text-center">
           <h2 className="text-2xl font-bold">Reserva não encontrada</h2>
           <button
@@ -82,8 +82,14 @@ export default function ViewReservation({ booking }: Props) {
   }
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-50">
+    <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-50 bg-background-image(url)">
       <div className="bg-black p-12 rounded-lg text-white max-w-xl w-full relative">
+        <button
+          onClick={() => router.push("/#reservas")}
+          className="absolute top-4 right-4 cursor-pointer"
+        >
+          <img src="/images/close-popup.png" alt="Fechar" className="w-8 h-8" />
+        </button>
         <h2 className="text-3xl font-bold text-center">Sua reserva:</h2>
         <div className="mt-10 text-lg text-center">
           <p><b>Data:</b> {reserva.dataReserva}</p>
@@ -93,23 +99,23 @@ export default function ViewReservation({ booking }: Props) {
         </div>
 
         <div className="flex justify-center gap-4 mt-12">
-          <button
+          {/* <button
             onClick={() => router.push("/#reservas")}
             className="w-1/3 bg-orange-500 text-white font-bold py-3 rounded-lg hover:bg-white hover:text-black transition cursor-pointer"
           >
             Fechar
-          </button>
+          </button> */}
           <button
             onClick={handleEdit}
-            className="w-1/3 bg-blue-500 text-white font-bold py-3 rounded-lg hover:bg-white hover:text-black transition cursor-pointer"
+            className="w-1/3 bg-white text-black font-bold py-3 rounded-lg border border-transparent hover:border-white hover:bg-black hover:text-white transition-colors duration-300 cursor-pointer"
           >
-            ✏️ Editar
+            Editar
           </button>
           <button
             onClick={handleDelete}
-            className="w-1/3 bg-red-600 text-white font-bold py-3 rounded-lg hover:bg-white hover:text-black transition cursor-pointer"
+            className="w-1/3 bg-orange-600 text-white font-bold py-3 rounded-lg hover:bg-white hover:text-black transition cursor-pointer"
           >
-            🗑️ Excluir
+            Excluir
           </button>
         </div>
       </div>

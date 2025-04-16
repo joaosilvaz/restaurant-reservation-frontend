@@ -35,7 +35,7 @@ export default function Footer() {
           />
         </div>
         <div className="flex justify-center md:justify-end gap-4">
-          <a href="#" className="hover:scale-110 transition transform duration-300">
+          <a href="https://www.instagram.com/joaovitoor._/" target="blank" className="hover:scale-110 transition transform duration-300">
             <img src="/images/insta.png" alt="Instagram" className="w-8 h-8" />
           </a>
           <a href="#" className="hover:scale-110 transition transform duration-300">

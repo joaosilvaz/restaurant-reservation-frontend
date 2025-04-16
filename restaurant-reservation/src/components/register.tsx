@@ -23,7 +23,7 @@ export default function SignupPage() {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:8080/usuarios", {
+      const response = await fetch("http://localhost:8080/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -31,7 +31,7 @@ export default function SignupPage() {
         body: JSON.stringify({
           nome: name,
           emailCliente: email,
-          senha: password // ou "false" dependendo da lógica
+          senha: password 
         }),
       });
 
