@@ -1,8 +1,10 @@
 "use client";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+
+import { useState, useEffect } from "react";
+import { useParams, useRouter } from "next/navigation";
 
 type Booking = {
+  id: number;
   telefoneCliente: string;
   dataReserva: string;
   horaReserva: string;
@@ -36,26 +38,48 @@ const getAllDates = (year = 2025) => {
   }));
 };
 
-export default function EditReservation({ booking }: Props) {
+export default function EditReservation() {
+  const { id } = useParams(); // pega o id da URL
+  const [booking, setBooking] = useState<Booking | null>(null);
+  const [loading, setLoading] = useState(true);
+
   const [dataReserva, setDataReserva] = useState("");
   const [horaReserva, setHoraReserva] = useState("");
-  const [quantidadePessoas, setQuantidadePessoas] = useState(1);
+  const [quantidadePessoas, setQuantidadePessoas] = useState<number | "">("");
+  const [mesa, setMesa] = useState<number | "">("");
   const [telefoneCliente, setTelefoneCliente] = useState("");
-  // const [user, setUser] = useState("");
-  // const [emailCliente, setEmailCliente] = useState("");
-  const [mesa, setMesa] = useState(0);
 
   const router = useRouter();
 
   useEffect(() => {
-    if (booking) {
-      setDataReserva(booking.dataReserva);
-      setHoraReserva(booking.horaReserva);
-      setQuantidadePessoas(booking.quantidadePessoas);
-      setTelefoneCliente(booking.telefoneCliente);
-      setMesa(booking.mesa);
+    if (id) {
+      fetch(`http://localhost:8080/bookings/${id}`)
+        .then((res) => res.json())
+        .then((data) => {
+          setBooking(data);
+          setDataReserva(data.dataReserva);
+          setHoraReserva(data.horaReserva);
+          setQuantidadePessoas(data.quantidadePessoas);
+          setTelefoneCliente(data.telefoneCliente);
+          setMesa(data.mesa);
+          setLoading(false);
+        })
+        .catch((err) => {
+          console.error("Erro ao buscar reserva:", err);
+          setLoading(false);
+        });
     }
-  }, [booking]);
+  }, [id]);
+
+  if (loading)
+    return <div className="text-white text-center mt-10">Carregando...</div>;
+
+  if (!booking)
+    return (
+      <div className="text-red-500 text-center mt-10">
+        Reserva não encontrada.
+      </div>
+    );
 
   const allDates = getAllDates(2025);
 
@@ -66,25 +90,29 @@ export default function EditReservation({ booking }: Props) {
       dataReserva.trim() !== "" &&
       horaReserva.trim() !== "" &&
       telefoneCliente.trim() !== "" &&
-      quantidadePessoas > 0 &&
-      mesa >= 0;
+      quantidadePessoas !== "" &&
+      Number(quantidadePessoas) > 0 &&
+      mesa !== "" &&
+      Number(mesa) > 0;
 
     if (!isValid) {
-      alert("Por favor, preencha todos os campos corretamente antes de atualizar a reserva.");
+      alert(
+        "Por favor, preencha todos os campos corretamente antes de atualizar a reserva."
+      );
       return;
     }
 
     const reservaAtualizada: Booking = {
+      id: booking.id,
       telefoneCliente,
       dataReserva,
       horaReserva,
-      quantidadePessoas,
+      quantidadePessoas: Number(quantidadePessoas),
       status: true,
-      mesa,
+      mesa: Number(mesa),
     };
 
-    // Aqui acontece a atualização real na API
-    fetch(`http://localhost:8080/bookings/${booking.mesa}`, {
+    fetch(`http://localhost:8080/bookings/${booking.id}`, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -99,15 +127,17 @@ export default function EditReservation({ booking }: Props) {
       })
       .then((data) => {
         console.log("Reserva atualizada com sucesso:", data);
+        localStorage.setItem("reserva", JSON.stringify(data));
         alert("Reserva atualizada com sucesso!");
-        window.location.href = "/#reservas";
+        router.push("/#reservas");
       })
       .catch((error) => {
         console.error("Erro ao atualizar a reserva:", error);
-        alert("Erro ao atualizar a reserva. Verifique o console para mais detalhes.");
+        alert(
+          "Erro ao atualizar a reserva. Verifique o console para mais detalhes."
+        );
       });
   };
-
 
   return (
     <div className="inset-0 flex items-center justify-center bg-white bg-opacity-60 z-50">
@@ -123,11 +153,11 @@ export default function EditReservation({ booking }: Props) {
           <div className="relative">
             <span className="absolute left-3 top-3 text-gray-400">📅</span>
             <select
-              value={dataReserva}
+              defaultValue={booking.dataReserva}
               onChange={(e) => setDataReserva(e.target.value)}
               className="w-full p-3 pl-10 bg-white text-gray-700 rounded-lg focus:outline-none"
             >
-              <option value="">Dia da Reserva</option>
+              <option value={booking.dataReserva}>Dia da Reserva</option>
               {allDates.map(({ value, label }) => (
                 <option key={value} value={value}>
                   {label}
@@ -138,7 +168,7 @@ export default function EditReservation({ booking }: Props) {
 
           <input
             type="time"
-            value={horaReserva}
+            defaultValue={booking.horaReserva}
             onChange={(e) => setHoraReserva(e.target.value)}
             className="w-full p-3 bg-white text-gray-700 rounded-lg focus:outline-none"
             placeholder="Horário"
@@ -147,7 +177,9 @@ export default function EditReservation({ booking }: Props) {
           <input
             type="number"
             value={quantidadePessoas}
-            onChange={(e) => setQuantidadePessoas(parseInt(e.target.value))}
+            onChange={(e) =>
+              setQuantidadePessoas(e.target.value === "" ? "" : parseInt(e.target.value))
+            }
             className="w-full p-3 bg-white text-gray-700 rounded-lg focus:outline-none"
             placeholder="Pessoas"
           />
@@ -155,7 +187,9 @@ export default function EditReservation({ booking }: Props) {
           <input
             type="number"
             value={mesa}
-            onChange={(e) => setMesa(parseInt(e.target.value))}
+            onChange={(e) =>
+              setMesa(e.target.value === "" ? "" : parseInt(e.target.value))
+            }
             className="w-full p-3 bg-white text-gray-700 rounded-lg focus:outline-none"
             placeholder="Mesa"
           />

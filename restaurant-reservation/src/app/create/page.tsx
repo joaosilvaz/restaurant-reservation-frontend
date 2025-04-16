@@ -1,6 +1,7 @@
 "use client";
 import ViewReservation from "@/app/view-reservations/page"; // Importa o modal
 import { useState } from "react";
+import {useRouter} from "next/navigation";
 
 interface Booking {
   id: number;
@@ -21,6 +22,8 @@ export default function CreateReservation() {
   const [createdBooking, setCreatedBooking] = useState<Booking | null>(null);
   const [showModal, setShowModal] = useState(false);
 
+  const router = useRouter();
+  
   const getAllDates = () => {
     const dates = [];
     const start = new Date("2025-04-09");
@@ -138,7 +141,7 @@ export default function CreateReservation() {
             Criar Reserva
           </button>
           <button type="button"
-            onClick={() => (window.location.href = "/#reservas")}
+            onClick={() => (router.push("/#reservas"))}
             className="w-1/3 bg-orange-500 text-white font-bold py-3 rounded-lg hover:bg-white hover:text-black transition cursor-pointer">
             Fechar
           </button>
