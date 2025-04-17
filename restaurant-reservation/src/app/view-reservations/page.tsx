@@ -82,8 +82,12 @@ export default function ViewReservation({ booking }: Props) {
   }
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-white bg-opacity-50 bg-background-image(url)">
-      <div className="bg-black p-12 rounded-lg text-white max-w-xl w-full relative">
+    <div className="fixed inset-0 flex items-center justify-center">
+      <div className="absolute inset-0 bg-[url('/images/bg-cadastro.jpg')] bg-no-repeat bg-cover bg-center z-0"></div>
+
+      <div className="absolute inset-0 bg-black opacity-40 z-0"></div>
+
+      <div className="bg-black p-12 rounded-lg text-white max-w-xl w-full relative z-10">
         <button
           onClick={() => router.push("/#reservas")}
           className="absolute top-4 right-4 cursor-pointer"
@@ -99,12 +103,6 @@ export default function ViewReservation({ booking }: Props) {
         </div>
 
         <div className="flex justify-center gap-4 mt-12">
-          {/* <button
-            onClick={() => router.push("/#reservas")}
-            className="w-1/3 bg-orange-500 text-white font-bold py-3 rounded-lg hover:bg-white hover:text-black transition cursor-pointer"
-          >
-            Fechar
-          </button> */}
           <button
             onClick={handleEdit}
             className="w-1/3 bg-white text-black font-bold py-3 rounded-lg border border-transparent hover:border-white hover:bg-black hover:text-white transition-colors duration-300 cursor-pointer"
@@ -121,4 +119,5 @@ export default function ViewReservation({ booking }: Props) {
       </div>
     </div>
   );
+
 }
