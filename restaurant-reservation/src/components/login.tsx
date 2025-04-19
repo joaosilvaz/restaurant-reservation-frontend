@@ -72,17 +72,20 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={!isFormValid}
-            className={`w-full py-2 rounded-3xl transition border ${
-              isFormValid
-                ? "bg-black text-white hover:bg-white hover:text-black hover:border-black cursor-pointer"
-                : "bg-black text-white cursor-not-allowed"
-            }`}
+            className={`w-full py-2 rounded-3xl transition border ${isFormValid
+              ? "bg-black text-white hover:bg-white hover:text-black hover:border-black cursor-pointer"
+              : "bg-black text-white cursor-not-allowed"
+              }`}
           >
             ENTRAR
           </button>
         </form>
 
-        <div className="text-center my-4 text-gray-500">OU</div>
+        <div className="flex items-center my-4">
+          <hr className="flex-grow border-t border-gray-600" />
+          <span className="mx-4 text-gray-500">OU</span>
+          <hr className="flex-grow border-t border-gray-600" />
+        </div>
 
         <button
           onClick={() => window.location.href = "https://accounts.google.com/signin"}

@@ -31,7 +31,7 @@ export default function SignupPage() {
         body: JSON.stringify({
           nome: name,
           emailCliente: email,
-          senha: password 
+          senha: password
         }),
       });
 
@@ -117,7 +117,11 @@ export default function SignupPage() {
           </button>
         </form>
 
-        <div className="text-center my-4 text-gray-500">OU</div>
+        <div className="flex items-center my-4">
+          <hr className="flex-grow border-t border-gray-600" />
+          <span className="mx-4 text-gray-500">OU</span>
+          <hr className="flex-grow border-t border-gray-600" />
+        </div>
 
         <button
           onClick={() => window.location.href = "https://accounts.google.com/signin"}
