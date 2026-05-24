@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { deleteBooking } from "../../actions/booking-actions";
+import { deleteBooking } from "../actions/booking-actions";
 
 export interface Booking {
   id: number;

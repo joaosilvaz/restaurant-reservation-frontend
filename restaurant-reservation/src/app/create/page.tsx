@@ -1,5 +1,5 @@
 "use client";
-import ViewReservation from "@/app/view-reservations/page"; // Importa o modal
+import ViewReservation from "@/components/view-reservations"; // Importa o modal
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 // 1. IMPORTANTE: Importe a função de criar reserva do seu arquivo de ações do servidor
