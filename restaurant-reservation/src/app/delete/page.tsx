@@ -1,6 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+// 1. IMPORTANTE: Importe a função de deletar reserva do seu arquivo do servidor
+// Ajuste o caminho do import ('@/actions/bookings' ou onde estiver o seu arquivo de rotas do servidor)
+import { deleteBooking } from "../../actions/booking-actions";
 
 interface Booking {
     id: number;
@@ -14,7 +17,7 @@ interface Booking {
 
 export default function DeleteReservation() {
     const [booking, setBooking] = useState<Booking | null>(null);
-    const router = useRouter()
+    const router = useRouter();
 
     useEffect(() => {
         const reserva = localStorage.getItem("reserva");
@@ -33,20 +36,17 @@ export default function DeleteReservation() {
         if (!isConfirmed) {
             return;
         }
-        try {
-            const response = await fetch(`http://localhost:8080/bookings/${booking.id}`, {
-                method: "DELETE",
-            });
 
-            if (response.ok) {
-                alert("Reserva excluída com sucesso!");
-                localStorage.removeItem("reserva");
-                window.location.href = "/#reservas";
-            } else {
-                const errorText = await response.text();
-                console.error("Erro ao excluir reserva:", errorText);
-                alert("Erro ao excluir reserva: " + errorText);
-            }
+        try {
+            // 2. Chamamos a Server Action passando apenas o ID. 
+            // Ela vai ler o seu .env e fazer o DELETE direto na Render de forma segura!
+            await deleteBooking(booking.id);
+
+            alert("Reserva excluída com sucesso!");
+            localStorage.removeItem("reserva");
+            
+            // Usando o router padrão do Next para manter a navegação limpa
+            router.push("/#reservas");
         } catch (error) {
             console.error("Erro ao deletar reserva:", error);
             alert("Erro inesperado ao excluir reserva.");
@@ -59,7 +59,7 @@ export default function DeleteReservation() {
                 <div className="bg-black p-12 rounded-lg text-white max-w-xl w-full text-center">
                     <h2 className="text-2xl font-bold">Reserva não encontrada</h2>
                     <button
-                        onClick={() => (window.location.href = "/#reservas")}
+                        onClick={() => router.push("/#reservas")}
                         className="mt-6 bg-orange-500 text-white px-6 py-3 rounded-lg hover:bg-white hover:text-black cursor-pointer transition"
                     >
                         Fechar
@@ -89,7 +89,7 @@ export default function DeleteReservation() {
 
                 <div className="flex justify-between mt-12 gap-4">
                     <button
-                        onClick={handleDelete} // Chama a função handleDelete ao clicar no botão
+                        onClick={handleDelete}
                         className="w-1/2 bg-white text-black font-bold py-3 rounded-lg hover:bg-black hover:text-white border border-white transition cursor-pointer"
                     >
                         Excluir Reserva

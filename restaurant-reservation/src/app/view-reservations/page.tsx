@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { deleteBooking } from "../../actions/booking-actions";
 
 export interface Booking {
   id: number;
@@ -46,19 +47,14 @@ export default function ViewReservation({ booking }: Props) {
     if (!isConfirmed) return;
 
     try {
-      const response = await fetch(`http://localhost:8080/bookings/${reserva.id}`, {
-        method: "DELETE",
-      });
+      // 2. Chamamos a Server Action de forma limpa. 
+      // Ela vai deletar a reserva na nuvem da Render usando o seu .env!
+      await deleteBooking(reserva.id);
 
-      if (response.ok) {
-        alert("Reserva excluída com sucesso!");
-        localStorage.removeItem("reserva");
-        router.push("/#reservas");
-      } else {
-        const errorText = await response.text();
-        console.error("Erro ao excluir reserva:", errorText);
-        alert("Erro ao excluir reserva: " + errorText);
-      }
+      alert("Reserva excluída com sucesso!");
+      localStorage.removeItem("reserva");
+      router.push("/#reservas");
+      
     } catch (error) {
       console.error("Erro ao deletar reserva:", error);
       alert("Erro inesperado ao excluir reserva.");
@@ -119,5 +115,4 @@ export default function ViewReservation({ booking }: Props) {
       </div>
     </div>
   );
-
 }

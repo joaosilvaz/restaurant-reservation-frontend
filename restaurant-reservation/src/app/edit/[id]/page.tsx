@@ -2,6 +2,9 @@
 
 import { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
+// 1. IMPORTANTE: Importe a função de atualizar do seu arquivo do servidor
+// Ajuste o caminho do import ('@/actions/bookings' ou onde estiver o seu arquivo do servidor)
+import { updateBooking } from "../../../actions/booking-actions";
 
 type Booking = {
   id: number;
@@ -11,10 +14,6 @@ type Booking = {
   quantidadePessoas: number;
   status: boolean;
   mesa: number;
-};
-
-type Props = {
-  booking: Booking;
 };
 
 const getAllDates = (year = 2025) => {
@@ -51,7 +50,11 @@ export default function EditReservation() {
 
   useEffect(() => {
     if (id) {
-      fetch(`http://localhost:8080/bookings/${id}`)
+      // Como o Next.js no Client precisa ler a variável da Render para buscar os dados iniciais,
+      // buscamos de forma segura. (Se preferir centralizar, pode criar um getBookingById no seu server file)
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || "https://restaurant-reservation-jcz8.onrender.com";
+
+      fetch(`${apiUrl}/bookings/${id}`)
         .then((res) => res.json())
         .then((data) => {
           setBooking(data);
@@ -68,16 +71,20 @@ export default function EditReservation() {
         });
     }
   }, [id]);
+
   if (loading)
     return <div className="text-white text-center mt-10">Carregando...</div>;
+
   if (!booking)
     return (
       <div className="text-red-500 text-center mt-10">
         Reserva não encontrada.
       </div>
     );
+
   const allDates = getAllDates(2025);
-  const handleSubmit = (e: React.FormEvent) => {
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     const isValid =
@@ -90,53 +97,47 @@ export default function EditReservation() {
       Number(mesa) > 0;
 
     if (!isValid) {
-      alert(
-        "Por favor, preencha todos os campos corretamente antes de atualizar a reserva."
-      );
+      alert("Por favor, preencha todos os campos correctamente antes de atualizar a reserva.");
       return;
     }
 
-    const reservaAtualizada: Booking = {
-      id: booking.id,
-      telefoneCliente,
-      dataReserva,
-      horaReserva,
-      quantidadePessoas: Number(quantidadePessoas),
-      status: true,
-      mesa: Number(mesa),
-    };
+    // 2. Montamos o FormData que a sua Server Action 'updateBooking' espera receber
+    const formData = new FormData();
+    formData.append("name", "Cliente"); // Altere dinamicamente se tiver o nome do usuário logado
+    formData.append("phone", telefoneCliente);
+    formData.append("email", "cliente@email.com");
+    formData.append("date", dataReserva);
+    formData.append("time", horaReserva);
+    formData.append("guests", quantidadePessoas.toString());
 
-    fetch(`http://localhost:8080/bookings/${booking.id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(reservaAtualizada),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Erro ao atualizar a reserva.");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Reserva atualizada com sucesso:", data);
-        localStorage.setItem("reserva", JSON.stringify(data));
-        alert("Reserva atualizada com sucesso!");
-        router.push("/#reservas");
-      })
-      .catch((error) => {
-        console.error("Erro ao atualizar a reserva:", error);
-        alert(
-          "Erro ao atualizar a reserva. Verifique o console para mais detalhes."
-        );
-      });
+    try {
+      // 3. Chamamos a Server Action passando o ID numérico e o FormData
+      await updateBooking(booking.id, formData);
+
+      // Atualiza o estado local do localStorage para manter os dados sincronizados na máquina do cliente
+      const reservaAtualizada: Booking = {
+        id: booking.id,
+        telefoneCliente,
+        dataReserva,
+        horaReserva,
+        quantidadePessoas: Number(quantidadePessoas),
+        status: true,
+        mesa: Number(mesa),
+      };
+      localStorage.setItem("reserva", JSON.stringify(reservaAtualizada));
+
+      alert("Reserva atualizada com sucesso!");
+      router.push("/#reservas");
+    } catch (error) {
+      console.error("Erro ao atualizar a reserva:", error);
+      alert("Erro ao atualizar a reserva. Tente novamente.");
+    }
   };
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-[url('/images/bg-cadastro.jpg')] bg-no-repeat bg-center bg-cover bg-opacity-60">
       <div className="inset-0 flex items-center justify-center z-50">
-      <div className="absolute inset-0 bg-black opacity-40 z-0"></div>
+        <div className="absolute inset-0 bg-black opacity-40 z-0"></div>
         <div className="bg-black rounded-lg max-w-md mx-auto h-[520px] text-white relative w-full">
           <h2 className="text-2xl font-bold text-center mt-10">Editar Reserva</h2>
 

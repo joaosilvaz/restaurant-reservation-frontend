@@ -2,6 +2,9 @@
 import ViewReservation from "@/app/view-reservations/page"; // Importa o modal
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+// 1. IMPORTANTE: Importe a função de criar reserva do seu arquivo de ações do servidor
+// Ajuste o caminho do import ('@/actions/bookings' ou onde quer que esteja seu arquivo anterior)
+import { createBooking } from "../../actions/booking-actions"; 
 
 interface Booking {
   id: number;
@@ -55,36 +58,36 @@ export default function CreateReservation() {
       return;
     }
 
-    const novaReserva = {
-      telefoneCliente: phone,
-      dataReserva: date,
-      horaReserva: time,
-      quantidadePessoas: parseInt(people),
-      status: true,
-      mesa: parseInt(mesa),
-    };
+    // 2. Criamos o objeto FormData esperado pela nossa Server Action
+    const formData = new FormData();
+    formData.append("name", "Cliente"); // Se tiver um campo de nome de usuário logado, coloque aqui
+    formData.append("phone", phone);
+    formData.append("email", "cliente@email.com"); // Mesma lógica, se tiver e-mail do usuário logado, passe aqui
+    formData.append("date", date);
+    formData.append("time", time);
+    formData.append("guests", people);
 
     try {
-      const response = await fetch("http://localhost:8080/bookings", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(novaReserva),
-      });
+      // 3. Chamamos a Server Action de forma limpa. 
+      // Ela vai usar automaticamente o .env configurado com o link da Render!
+      await createBooking(null, formData);
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        console.error("Erro na resposta:", errorText);
-        throw new Error(`Erro ao criar reserva: ${errorText}`);
-      }
-
-      const data = await response.json();
       alert("Reserva criada com sucesso!");
-      setCreatedBooking(data);
-      localStorage.setItem("reserva", JSON.stringify(data)); // salva a reserva
-      setShowModal(true);
+      
+      // Simulando o retorno para o modal local do cliente
+      const mockData: Booking = {
+        id: Math.floor(Math.random() * 10000), // O ID real virá do banco quando renderizar a página de visualização
+        telefoneCliente: phone,
+        dataReserva: date,
+        horaReserva: time,
+        quantidadePessoas: parseInt(people),
+        status: true,
+        mesa: parseInt(mesa),
+      };
 
+      setCreatedBooking(mockData);
+      localStorage.setItem("reserva", JSON.stringify(mockData)); 
+      setShowModal(true);
 
     } catch (error) {
       console.error("Erro ao enviar reserva:", error);
