@@ -54,14 +54,18 @@ export async function loginUser(formData: FormData) {
 //           CONTEXTO: RESERVAS (BOOKINGS)
 // ==========================================
 
-// Buscar todas as reservas
+// Buscar todas as reservas (Atualizado para suportar a paginação do Spring Data)
 export async function getBookings() {
-  // Caso a variável mude de nome ou suma por algum motivo, uma proteção simples:
   if (!BOOKINGS_API) throw new Error("A API_URL não foi definida no ambiente.");
 
   const response = await fetch(BOOKINGS_API, { cache: "no-store" });
   if (!response.ok) throw new Error("Erro ao buscar reservas");
-  return response.json();
+  
+  const data = await response.json();
+  
+  // Se os dados vierem encapsulados pelo Pageable do Spring (objeto contendo 'content'),
+  // retornamos apenas a lista de elementos. Caso contrário, retorna o dado direto.
+  return data.content ? data.content : data;
 }
 
 // Criar nova reserva
