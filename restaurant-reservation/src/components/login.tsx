@@ -16,7 +16,7 @@ export default function LoginPage() {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:8080/users");
+      const response = await fetch(`${process.env.API_URL}/users`);
       const users = await response.json();
 
       const user = users.find((u: any) => u.emailCliente === email && u.senha === password);

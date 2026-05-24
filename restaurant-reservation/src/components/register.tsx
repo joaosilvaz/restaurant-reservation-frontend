@@ -23,7 +23,8 @@ export default function SignupPage() {
     setError("");
 
     try {
-      const response = await fetch("http://localhost:8080/users", {
+      // Usa a variável dinâmica mapeada pelo seu next.config.js
+      const response = await fetch(`${process.env.API_URL}/users`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -41,8 +42,8 @@ export default function SignupPage() {
       }
 
       if (response.ok) {
-        alert('Conta criada com sucesso!')
-        router.push("/");
+        alert('Conta criada com sucesso!');
+        router.push("/login"); // Uma boa prática: joga o usuário para logar após criar a conta
       } else {
         setError("Erro ao criar conta. Tente novamente.");
       }
